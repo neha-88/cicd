@@ -2,9 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -14,24 +12,10 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        node-version: '18'
+        python-version: '3.10'
 
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Build Project
-      run: npm run build
-
-    - name: Run Tests
-      run: npm test
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Deploy Application
-      run: echo "Deploying application..."
+    - name: Run Application
+      run: python app.py
