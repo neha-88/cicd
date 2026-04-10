@@ -1,21 +1,14 @@
-name: CI/CD Pipeline
+name: Simple CI
 
-on:
-  push:
-    branches: [ main ]
+on: push
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-
-    - name: Setup Python
-      uses: actions/setup-python@v5
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
-
-    - name: Run Python File
-      run: python app.py
+        python-version: "3.x"
+    - run: python app.py
